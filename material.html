@@ -4,32 +4,124 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <!-- Cabeçalhos de segurança básicos -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <!-- Política de Segurança de Conteúdo (CSP) -->
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; img-src 'self' data: https://*; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://vlibras.gov.br https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://*; connect-src 'self' https://vlibras.gov.br https://*;" />
-  <title>Links e Materiais - Portal IBS Sete Lagoas</title>
-  <!-- Fontes (Padrão Index) -->
+  <title>Biblioteca - Portal IBS Sete Lagoas</title>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
     rel="stylesheet" />
-  <!-- Ícones (Padrão Index - FA 6.5.1) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-
   <link href="assets/css/estilos.css" rel="stylesheet" />
+
+  <style>
+    /* --- ESTILOS DA BUSCA --- */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      border-radius: 99px;
+      border: 1px solid #e0e0e5;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 18px;
+    }
+
+    /* --- CORREÇÃO DO ALINHAMENTO (GRID) --- */
+    /* Isso garante que a lista se comporte como uma grade */
+    ul.recursos-list {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    /* A MÁGICA: Faz o Título da Categoria ocupar a linha toda */
+    li.categoria-header {
+      grid-column: 1 / -1 !important;
+      /* Vai da primeira à última coluna */
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e6ecf3;
+      font-size: 1.2rem;
+      color: #2b5f7f;
+      /* Azul Institucional */
+      list-style: none;
+      /* Remove a bolinha */
+    }
+
+    /* Garante que o item header não tenha fundo de card */
+    li.categoria-header:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Garante que os cards normais tenham altura */
+    ul.recursos-list li:not(.categoria-header) {
+      display: flex;
+    }
+
+    /* Estilo visual dos links dentro dos cards */
+    ul.recursos-list li a {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e6ecf3;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    ul.recursos-list li a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      color: #2b5f7f;
+    }
+
+    ul.recursos-list li a i {
+      font-size: 24px;
+      color: #ff9800;
+      /* Cor do ícone */
+    }
+  </style>
 </head>
 
-<body>
-  <!-- CABEÇALHO PADRÃO -->
+<body class="pg-material">
   <header class="header">
     <div class="header-top">
       <div class="logo-area">
         <a href="index.html" title="Voltar à página inicial">
-          <img alt="Voltar à página inicial" src="assets/img/logo-prefeitura.png" />
+          <img alt="Prefeitura de Sete Lagoas" src="assets/img/logo-prefeitura.png" />
         </a>
         <div class="logo-text">
           <h1>IBS-Sete Lagoas</h1>
@@ -62,218 +154,107 @@
       </div>
     </nav>
   </header>
-  <!-- CONTEÚDO PRINCIPAL -->
+
   <main class="container">
-    <!-- Título da Página -->
     <h1 class="page-title">Biblioteca da Reforma Tributária</h1>
     <div class="intro-text">
-      <p>
-        Navegue pelos portais e documentos oficiais para entender a Reforma
-        Tributária do Consumo. Reunimos aqui os links oficiais para manuais,
-        apresentações, documentação técnica e portais do governo. Mantenha-se
-        informado.
-      </p>
+      <h3>
+        <p>
+          Acervo oficial de documentos, manuais, notas técnicas e normativos.
+          Utilize nosso motor de busca abaixo para filtrar pelo tema desejado.
+        </p>
+      </h3>
     </div>
 
-    <!-- Seção com a lista de links originais -->
+    <div class="search-container">
+      <i class="fa-solid fa-search search-icon"></i>
+      <input type="text" id="librarySearch" class="search-input"
+        placeholder="O que você procura? (Ex: gravação, NFS-e, orientativa...)" onkeyup="filterLibrary()">
+    </div>
+
     <div class="section">
-      <h2 class="section-title">Links Oficiais e Materiais de Apoio</h2>
-      <ul class="recursos-list">
-        <li>
-          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-book-open"></i>
-            <!-- Ícone de livro -->
-            <span>Manuais da Receita Federal da Reforma Tributária do
-              Consumo</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/apresentacoes/reforma-tributaria-do-consumo"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-person-chalkboard"></i>
-            <!-- Ícone de apresentação -->
-            <span>Apresentações da Reforma Tributária do Consumo (palestras,
-              seminários e entrevistas)</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://campanhas.serpro.gov.br/reforma-tributaria/" rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-microchip"></i>
-            <!-- Ícone de tecnologia -->
-            <span>Entenda como a Reforma Tributária está redesenhando o sistema
-              fiscal brasileiro e como a inovação tecnológica está no centro
-              dessa mudança histórica.</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica" rel="noopener noreferrer"
-            target="_blank">
-            <i class="fa-solid fa-file-code"></i>
-            <!-- Ícone de arquivo de código -->
-            <span>Documentação Técnica (NFS-e). Minutas de documentação técnica.
-              A documentação técnica definitiva será homologada e publicada
-              pelo CGNFS, quando instalado.</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.gov.br/nfse/pt-br" rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-receipt"></i>
-            <!-- Ícone de nota fiscal -->
-            <span>Portal da Nota Fiscal de Serviço eletrônica</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.gov.br/fazenda/pt-br/acesso-a-informacao/acoes-e-programas/reforma-tributaria"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-landmark"></i>
-            <!-- Ícone de governo -->
-            <span>Ministério da Fazenda - Regulamentação da Reforma
-              Tributária</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- NOVA SEÇÃO: Guias, Notas Orientativas e Legislação -->
-    <div class="section" id="notas-orientativas">
-      <h2 class="section-title">
-        Notas Orientativas do Comitê Gestor do IBS e Casos Práticos
-      </h2>
-      <ul class="recursos-list">
-        <li>
-          <a href="https://cgibs.gov.br/upload/arquivos/202511/18121609-gt-08-guia-orientativo-para-impactos-administrativos-da-reforma-tributaria-edicao-1-2-2.pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-book-open"></i>
-            <span>Guia Orientativo para Impactos Administrativos da Reforma
-              Tributária (GT-08 / CG-IBS) – Orientações para Estados,
-              Municípios e DF</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://cgibs.gov.br/upload/arquivos/202511/13142212-item-2-3-cartilha-do-ibs-vol-1-formatada-20251110-1506.pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-book-open-reader"></i>
-            <span>Cartilha do IBS – Volume 1: Efeitos dos documentos fiscais
-              eletrônicos na apuração assistida dos Sistemas Operacionais do
-              CG-IBS</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1pMBefGkN0evMXsoW1KTW61efKwYqpCtR/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Consultas Formais sobre o IBS – Competência exclusiva do
-              Comitê Gestor do IBS (CGIBS)</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1WAQrVQ391oPSFqJURxJ7Zo-bYsWbc00h/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-circle-question"></i>
-            <span>Nota Orientativa I-001 – Adequações das Constituições
-              Estaduais e Leis Orgânicas Municipais à EC nº 132/2023</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1yzdHsmQP-M9n-b0fymdDbd-7LU-Mjx4CttsWKqdBJr8/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pen"></i>
-            <span>Nota Orientativa I-004 – Atualização das Situações
-              Cadastrais</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1QIFFB9tJ3jKbnBY-QUwS4VBzkHOhQaid/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pen"></i>
-            <span>Nota Orientativa I-005 – Adesão ao Padrão Nacional para
-              NFS-e</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1vdIdymKIy2rN1QFEhgOJKHbE7ifZ5hXG/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-sitemap"></i>
-            <span>Nota Orientativa I-006 – Estrutura Administrativa dos Entes
-              Subnacionais para a RTC</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1kTX-jKpbsV3YDtSfvvhRnmMAX91BqVLP/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Nota Orientativa I-007 – Adequação da Legislação Relativa à
-              Cota-Parte Municipal</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1YmN_e4XCvU0VoN3MIQBjpcpz0nS8tk7y/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-id-card"></i>
-            <span>Nota Orientativa I-008 – Obrigatoriedade de CNPJ para Pessoas
-              Físicas</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1vCdiOMl0Y0sbXee_Vtt5CWzt4r65WgsoNNFEw1Tcs_I/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-people-group"></i>
-            <span>Nota Orientativa P-001 – Adequação Legal para Disponibilização
-              de Servidores ao CGIBS</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://docs.google.com/document/d/1fttgJ8qh0Cs0xlJiF8vlU4dbPzKbYdDC/export?format=pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-chalkboard-user"></i>
-            <span>Nota Orientativa P-002 – Capacitações sobre a Reforma
-              Tributária do Consumo (RTC)</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/acoes-e-programas/programas-e-atividades/cnpj-alfanumerico"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-hashtag"></i>
-            <span>Página do CNPJ Alfanumérico – Receita Federal do Brasil</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://comsefaz.org.br/novo/wp-content/uploads/2024/11/DOC-20241106-WA0022_241106_1255381.pdf"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-handshake"></i>
-            <span>Acordo de Cooperação Técnica 001/2024 – COMSEFAZ e FNP (Governança
-              compartilhada da regulamentação da RTC)</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://abrasf.org.br/images/2025/Arquivos/Modelo_COSISP.pdf" rel="noopener noreferrer"
-            target="_blank">
-            <i class="fa-solid fa-file-contract"></i>
-            <span>COSISP – Modelo de Legislação para adequação das Leis
-              Municipais à EC nº 132/2023 (ABRASF)</span>
-          </a>
-        </li>
-
+      <ul class="recursos-list" id="libraryList">
         <li>
           <a href="https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc132.htm" rel="noopener noreferrer"
             target="_blank">
             <i class="fa-solid fa-scale-balanced"></i>
-            <span>Emenda Constitucional nº 132/2023 – Altera o Sistema Tributário
-              Nacional</span>
+            <span>Emenda Constitucional 132/2023 – Reforma Tributária do Consumo</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-gavel"></i>
+            <span>Lei Complementar 214/2025 – Regulamenta IBS, CBS e IS</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-store"></i>
+            <span>Lei Complementar 123/2006 – Estatuto da Microempresa e EPP (Simples Nacional)</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.planalto.gov.br/CCIVIL_03/Projetos/Ato_2023_2026/2024/PLP/plp-108.htm"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-landmark-dome"></i>
+            <span>Projeto de Lei Complementar nº 108/2024 – Comitê Gestor do IBS</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://legis.senado.leg.br/sdleg-getter/documento?dm=10075721&ts=1760728734558&disposition=inline"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span>Doação de Quaisquer Bens ou Direitos (ITCMD) – Projeto de Lei</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Manuais Piloto Reforma Tributária (v1 e v2) – Receita Federal</span>
+            <!-- Síntese: Documentos técnicos detalhados que explicam o funcionamento do Piloto da Reforma Tributária do Consumo, com instruções passo a passo para contribuintes realizarem testes do sistema de apuração assistida, incluindo exemplos práticos e fluxos de operação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Glossário da Reforma Tributária do Consumo (Nov/2025)</span>
+            <!-- Síntese: Compilação oficial de termos técnicos e conceitos fundamentais da reforma tributária, contendo definições padronizadas de IBS, CBS, IS, apuração assistida, créditos, alíquotas e demais expressões técnicas utilizadas na legislação -->
+          </a>
+        </li>
+        <li>
+          <a href="https://www.gov.br/fazenda/pt-br/assuntos/noticias/2025/Maio/split-payment-e-reforma-tributaria-um-salto-para-a-modernidade-fiscal"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <span>Split Payment na Reforma Tributária</span>
+          </a>
+          <!-- Síntese: Artigo explicativo que aborda a introdução do Split Payment como uma ferramenta inovadora na Reforma Tributária, que visa facilitar o pagamento de tributos, especialmente o IBS, ao permitir que pagamentos sejam feitos em partes, com benefícios para contribuintes e a Receita Federal-->
+        </li>
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/acoes-e-programas/programas-e-atividades/reforma-consumo/piloto"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Calculadora de Tributos CBS/IBS/IS (Beta – Código Aberto)</span>
+            <!-- Síntese: Ferramenta interativa desenvolvida pela Receita Federal que permite simular cálculos de CBS, IBS e IS em operações de compra e venda, com código-fonte aberto disponível no GitHub para contribuições da comunidade técnica -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.youtube.com/@ReceitaFederal" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-video"></i>
+            <span>Programa Diálogos – Entendendo a Reforma Tributária (14 episódios)</span>
+            <!-- Síntese: Série completa de vídeos educacionais apresentada pelo Secretário Robinson Barreirinhas, abordando desde conceitos básicos até aspectos avançados da reforma, com entrevistas, exemplos práticos e esclarecimentos de dúvidas frequentes -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/acoes-e-programas/programas-e-atividades/reforma-consumo/entenda"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            <span>Entenda a Reforma Tributária do Consumo</span>
+            <!-- Síntese: Página informativa central da Receita Federal com FAQ, cronograma, conceitos básicos, impactos por setor e orientações para diferentes perfis de contribuintes, atualizada regularmente com as últimas definições -->
           </a>
         </li>
 
@@ -281,105 +262,367 @@
           <a href="https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/127567/visao/multivigente"
             rel="noopener noreferrer" target="_blank">
             <i class="fa-solid fa-file-lines"></i>
-            <span>Instrução Normativa RFB nº 2.119/2022 – Cadastro Nacional da
-              Pessoa Jurídica (CNPJ)</span>
+            <span>Instrução Normativa RFB nº 2.119/2022 – Cadastro CNPJ</span>
+            <!-- Síntese: Regulamentação técnica que estabelece procedimentos para cadastro, alteração e consulta de CNPJ na base da Receita Federal, incluindo regras para empresas do Simples Nacional e regime normal -->
           </a>
         </li>
 
         <li>
           <a href="https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/141102" rel="noopener noreferrer"
             target="_blank">
-            <i class="fa-solid fa-file-lines"></i>
-            <span>Instrução Normativa RFB nº 2.229/2024 – Estabelece o formato
-              alfanumérico para o CNPJ</span>
+            <i class="fa-solid fa-hashtag"></i>
+            <span>Instrução Normativa RFB nº 2.229/2024 – CNPJ Alfanumérico</span>
+            <!-- Síntese: Instrução normativa que introduz a nova codificação alfanumérica do CNPJ, com regras de transição, validação e impacto nos sistemas de emissão de documentos fiscais eletrônicos -->
           </a>
         </li>
 
         <li>
-          <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp214.htm" rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Lei Complementar Federal nº 214/2025 – Institui o IBS, a CBS, o
-              Imposto Seletivo e cria o CG-IBS</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=hDHoBqhO7H8="
+          <a href="https://www.gov.br/fazenda/pt-br/acesso-a-informacao/acoes-e-programas/reforma-tributaria"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica 2025.001-RTC (BP-e) – Adequação dos leiautes do
-              BP-e e BP-e TM à RTC</span>
+            <i class="fa-solid fa-landmark"></i>
+            <span>Portal da Reforma Tributária (Regulamentação, Projetos e Notícias)</span>
+            <!-- Síntese: Portal central do Ministério da Fazenda que reúne todos os projetos de lei, propostas de regulamentação, notícias oficiais, cronogramas e documentos estruturantes da reforma tributária do consumo -->
           </a>
         </li>
 
         <li>
-          <a href="https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=fR216JGyZYw="
+          <a href="https://www.gov.br/nfse/pt-br" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-globe"></i>
+            <span>Portal Nacional da NFS-e (Emissor e Legislação)</span>
+            <!-- Síntese: Portal oficial único para emissão de NFS-e nacional, contendo legislação aplicável, manuais, leiautes técnicos, notas técnicas e acesso ao emissor gratuito para contribuintes -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica/documentacao-atual"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica 2025.001-RTC (CT-e) – Adequação dos leiautes do
-              CT-e, CT-eOS e GTV-e à RTC</span>
+            <i class="fa-solid fa-server"></i>
+            <span>Manual Contribuintes Emissor Público API v1.2 (Out/2025)</span>
+            <!-- Síntese: Documentação técnica detalhada para desenvolvedores que precisam integrar sistemas próprios com o emissor público da NFS-e via API, incluindo endpoints, autenticação, exemplos de requisições e respostas -->
           </a>
         </li>
 
         <li>
-          <a href="https://dfe-portal.svrs.rs.gov.br/Nf3e/Documentos#:~:text=Nota%20T%C3%A9cnica%202025.001%20%2D%20RTC%20v1.10"
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica/rtc/nt-005-se-cgnfse-novo-layout-rtc.pdf"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica 2025.001-RTC (NF3e) – Adequações da NF3e para a
-              RTC</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://dfe-portal.svrs.rs.gov.br/Nfcom/Documentos#:~:text=Nota%20T%C3%A9cnica%202025.001%20%2D%20RTC%20v1.10"
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica 2025.001-RTC (NFCom) – Adequações da NFCom para a
-              RTC</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=YFz9is%20R6tw="
-            rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica 2025.002 v1.30 (NF-e/NFC-e) – Adequação dos
-              leiautes da NF-e e NFC-e à RTC</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="https://dfe-portal.svrs.rs.gov.br/Mdfe/Documentos#" rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica Conjunta CNPJ Alfanumérico 2025.001 – Implementação
-              do CNPJ alfanumérico em documentos fiscais eletrônicos</span>
+            <i class="fa-solid fa-file-code"></i>
+            <span>Nota Técnica 005/SE-CGNFS-e – Novo Layout RTC (IBS/CBS)</span>
+            <!-- Síntese: Nota técnica que detalha as mudanças no layout da NFS-e para incluir campos de IBS e CBS, com especificações de XML, novos grupos de informação e cronograma de implementação obrigatória -->
           </a>
         </li>
 
         <li>
           <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica/rtc/nt-004-se-cgnfse-novo-layout-rtc.pdf/@@download/file"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Nota Técnica SE/CGNFS-e nº 004/2025 – Adequações do layout da
-              NFS-e para a RTC</span>
+            <i class="fa-solid fa-file-code"></i>
+            <span>Nota Técnica SE/CGNFS-e nº 004/2025 – Adequações da NFS-e</span>
+            <!-- Síntese: Nota técnica complementar com ajustes e correções no layout da NFS-e, abordando questões identificadas após a implementação da NT 005, com foco em validações e regras de negócio -->
           </a>
         </li>
 
         <li>
-          <a href="https://legis.senado.leg.br/sdleg-getter/documento?dm=10075721&ts=1760728734558&disposition=inline"
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica/documentacao-atual"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-house-chimney"></i>
-            <span>Doação de Quaisquer Bens ou Direitos (ITCMD) – Projeto de
-              legislação correlata</span>
+            <i class="fa-solid fa-table"></i>
+            <span>Anexo VI – Leiautes RN RTC (Planilha de Campos)</span>
+            <!-- Síntese: Planilha Excel detalhada com todos os campos do leiaute da NFS-e, tipos de dados, tamanhos, obrigatoriedade, validações e relacionamentos entre campos para implementação técnica -->
           </a>
         </li>
 
         <li>
-          <a href="https://drive.google.com/file/d/1QOwx5mn2WrxkjLtgVCBCth45SSf_96Ir/view" rel="noopener noreferrer"
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/documentacao-tecnica/documentacao-atual"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>Documentação Técnica Completa (Manuais, XSDs, RNGs)</span>
+            <!-- Síntese: Repositório completo com todos os documentos técnicos da NFS-e, incluindo manuais de integração, esquemas XML (XSD), gramáticas de validação (RNG) e documentação de versões anteriores -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/legislacao-aplicavel-ao-mei" rel="noopener noreferrer"
             target="_blank">
-            <i class="fa-solid fa-city"></i>
-            <span>Relatório Técnico nº 07/2025 – Município de Ilhéus (BA):
-              Implantação da NFS-e Nacional e recomendações na RTC</span>
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Resolução CGSN 169/2022 – Obrigatoriedade de emissão de NFS-e pelo MEI</span>
+            <!-- Síntese: Resolução que torna obrigatória a emissão de NFS-e no padrão nacional para MEI prestadores de serviços desde 03/04/2023, com regras de uso do emissor web e autenticação gov.br -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/nfse/pt-br/biblioteca/legislacao-aplicavel-ao-mei" rel="noopener noreferrer"
+            target="_blank">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>Resolução CGNFS-e 3/2023 – Modelo da NFS-e de padrão nacional</span>
+            <!-- Síntese: Resolução que estabelece o modelo jurídico e técnico da NFS-e nacional, validade eletrônica, assinatura, emissão via DPS, eventos e guarda do documento fiscal -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/nfse/pt-br" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Resolução CG-NFS-e 6/2025 – Compartilhamento de dados e integração</span>
+            <!-- Síntese: Resolução que regulamenta o compartilhamento de dados da NFS-e entre entes federativos e a integração com o Ambiente de Dados Nacional (ADN) para fins de IBS -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.serpro.gov.br/arquivos/paper-digital-reforma-tributaria.pdf" rel="noopener noreferrer"
+            target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Paper Digital: Transformação que constrói o futuro</span>
+            <!-- Síntese: Documento estratégico do SERPRO detalhando a arquitetura tecnológica da plataforma RTC, desafios de implementação, segurança de dados e benefícios da transformação digital tributária -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.serpro.gov.br/arquivos/infografico-digital-reforma-tributaria.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Infográfico Digital: Caminho do Imposto</span>
+            <!-- Síntese: Material visual interativo que ilustra o fluxo completo do imposto desde a emissão da nota fiscal até a distribuição entre entes federativos, mostrando pontos de integração e compartilhamento -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.serpro.gov.br/menu/noticias/noticias-2025/conheca-site-especial-tecnologia-impulsiona-reforma-tributaria"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Site Especial: Tecnologia impulsiona a Reforma Tributária</span>
+            <!-- Síntese: Portal dedicado do SERPRO apresentando soluções tecnológicas da plataforma RTC, cronograma de implementação, notícias sobre infraestrutura e casos de uso da tecnologia -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://campanhas.serpro.gov.br/reforma-tributaria/" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Entenda a Tecnologia da Reforma Tributária (Página SERPRO)</span>
+            <!-- Síntese: Página explicativa sobre a arquitetura de sistemas, protocolos de comunicação, segurança da informação e capacidade de processamento da plataforma nacional de documentos fiscais -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.cgibs.gov.br" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Site Oficial do Comitê Gestor (Leis e Resoluções)</span>
+            <!-- Síntese: Portal oficial do Comitê Gestor do IBS com publicação de todas as resoluções, notas orientativas, atas de reuniões, legislação aplicada e informações sobre composição e deliberações -->
+          </a>
+        </li>
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo/glosario-da-reforma-tributaria-do-consumo-versao-2-novembro25/@@download/file"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            <span>Glossário da Reforma Tributária do Consumo (Nov/2025)</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo/primeiros-passos-modulo-apuracao-assistida-numero-1/@@download/file"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Primeiros Passos: Apuração Assistida (Parte 1)</span>
+            <!--A apuração assistida é uma inovação trazida pela Reforma Tributária, que visa simplificar o processo de apuração de tributos, especialmente a Contribuição sobre Bens e Serviços (CBS) e o Imposto sobre Bens e Serviços (IBS). Nesse modelo, a Receita Federal utiliza informações de documentos fiscais eletrônicos, como notas fiscais, para calcular automaticamente os débitos e créditos de cada contribuinte-->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/reforma-tributaria-do-consumo/primeiros-passos-modulo-apuracao-assistida-2/@@download/file"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Primeiros Passos: Apuração Assistida (Parte 2)</span>
+            <!--A apuração assistida é uma inovação trazida pela Reforma Tributária, que visa simplificar o processo de apuração de tributos, especialmente a Contribuição sobre Bens e Serviços (CBS) e o Imposto sobre Bens e Serviços (IBS). Nesse modelo, a Receita Federal utiliza informações de documentos fiscais eletrônicos, como notas fiscais, para calcular automaticamente os débitos e créditos de cada contribuinte-->
+          </a>
+        </li>
+        <li>
+          <a href="https://fenacon.org.br/wp-content/uploads/2025/11/13142212-item-2-3-cartilha-do-ibs-vol-1-formatada-20251110-1506.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>Cartilha Orientativa para Emissão da NF-e do IBS – Vol. 1</span>
+            <!-- Síntese: Cartilha detalhada com orientações práticas para emissão da NF-e com campos de IBS, incluindo exemplos de preenchimento, cenários de uso e procedimentos para diferentes regimes tributários -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cgibs.gov.br/upload/arquivos/202511/13142212-item-2-3-cartilha-do-ibs-vol-1-formatada-20251110-1506.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book-open-reader"></i>
+            <span>Cartilha do IBS – Volume 1: Apuração Assistida</span>
+            <!-- Síntese: Versão oficial do CGIBS da cartilha de apuração assistida, com detalhamento do processo de cálculo, compensação de créditos e geração de guias de recolhimento pelo contribuinte -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://comsefaz.org.br/novo/wp-content/uploads/2025/11/GT-08-Guia-Orientativo-para-Impactos-Administrativos-da-Reforma-Tributaria.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>Guia Orientativo de Impactos Administrativos (COMSEFAZ)</span>
+            <!-- Síntese: Guia prático para gestores públicos sobre mudanças administrativas necessárias, incluindo adequação de sistemas, capacitação de servidores, alterações legislativas municipais e cronograma de implementação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cgibs.gov.br/upload/arquivos/202511/18121609-gt-08-guia-orientativo-para-impactos-administrativos-da-reforma-tributaria-edicao-1-2-2.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Guia Orientativo GT-08: Impactos Administrativos</span>
+            <!-- Síntese: Edição atualizada do guia GT-08 do CGIBS com 18 orientações detalhadas sobre impactos administrativos, incluindo checklist de adequação para municípios e estados -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1pMBefGkN0evMXsoW1KTW61efKwYqpCtR/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <span>Consultas Formais sobre o IBS – Competência do CGIBS</span>
+            <!-- Síntese: Documento que esclarece a competência exclusiva do CGIBS para responder consultas formais sobre interpretação da legislação do IBS, com procedimentos para submissão e prazos de resposta -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1WAQrVQ391oPSFqJURxJ7Zo-bYsWbc00h/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-circle-question"></i>
+            <span>Nota Orientativa I-001 – Adequação das Constituições e Leis Orgânicas</span>
+            <!-- Síntese: Orientação técnica sobre necessidade de adequação das constituições estaduais e leis orgânicas municipais para compatibilização com a EC 132/2023 e LC 214/2025 -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1yzdHsmQP-M9n-b0fymdDbd-7LU-Mjx4CttsWKqdBJr8/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>Nota Orientativa I-004 – Atualização das Situações Cadastrais</span>
+            <!-- Síntese: Instruções sobre procedimentos para atualização cadastral de contribuintes no sistema nacional, incluindo migração de dados e validação de informações pré-existentes -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1QIFFB9tJ3jKbnBY-QUwS4VBzkHOhQaid/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>Nota Orientativa I-005 – Adesão ao Padrão Nacional NFS-e</span>
+            <!-- Síntese: Passo a passo para municípios aderirem ao padrão nacional da NFS-e, incluindo requisitos técnicos, prazos, testes de homologação e procedimentos de migração de sistemas -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1vdIdymKIy2rN1QFEhgOJKHbE7ifZ5hXG/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-sitemap"></i>
+            <span>Nota Orientativa I-006 – Estrutura Administrativa dos Entes</span>
+            <!-- Síntese: Orientações sobre estrutura organizacional mínima necessária nos entes federativos para implementação do IBS, incluindo definição de equipes técnicas e responsabilidades -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1kTX-jKpbsV3YDtSfvvhRnmMAX91BqVLP/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <span>Nota Orientativa I-007 – Legislação da Cota-Parte Municipal</span>
+            <!-- Síntese: Esclarecimentos sobre a legislação municipal que trata da cota-parte do IBS, competências, limites e procedimentos para definição e alteração das alíquotas municipais -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1YmN_e4XCvU0VoN3MIQBjpcpz0nS8tk7y/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-id-card"></i>
+            <span>Nota Orientativa I-008 – Obrigatoriedade de CNPJ para Pessoas Físicas</span>
+            <!-- Síntese: Orientação sobre situações em que pessoas físicas precisarão de CNPJ para fins de IBS, incluindo regras de enquadramento e procedimentos de cadastro -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1vCdiOMl0Y0sbXee_Vtt5CWzt4r65WgsoNNFEw1Tcs_I/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-people-group"></i>
+            <span>Nota Orientativa P-001 – Disponibilização de Servidores ao CGIBS</span>
+            <!-- Síntese: Procedimentos para que estados e municípios disponibilizem servidores técnico-administrativos para atuação no Comitê Gestor do IBS, com requisitos de qualificação e períodos de cessão -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://docs.google.com/document/d/1fttgJ8qh0Cs0xlJiF8vlU4dbPzKbYdDC/export?format=pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Nota Orientativa P-002 – Capacitações sobre a Reforma</span>
+            <!-- Síntese: Programa nacional de capacitação para servidores públicos sobre IBS, incluindo calendário de treinamentos, conteúdo programático e certificação profissional -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://fnp.org.br/component/banners/click/404" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-video"></i>
+            <span>Webinar FNP: Diálogos Reforma Tributária (NFS-e Nacional)</span>
+            <!-- Síntese: Gravação do primeiro episódio da série FNP com debate sobre obrigatoriedade da NFS-e nacional, participação de secretários de finanças e especialistas técnicos respondendo perguntas ao vivo -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://fnp.org.br/noticias/item/3657-fnp-e-comsefaz-lancam-guia-sobre-a-reforma-tributaria-para-os-municipios"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-handshake"></i>
+            <span>Guia FNP e Comsefaz para Municípios (Nov/2025)</span>
+            <!-- Síntese: Publicação conjunta com orientações práticas para gestores municipais sobre adequação de sistemas, legislação local, capacitação de equipes e cronograma de implementação da reforma -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://fnp.org.br/noticias/item/3668-comite-gestor-lanca-cartilha-para-orientar-a-emissao-da-nota-fiscal-eletronica-do-ibs"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Notícia: Comitê Gestor lança Cartilha NF-e do IBS</span>
+            <!-- Síntese: Notícia oficial anunciando o lançamento da cartilha de orientação para emissão de NF-e com campos de IBS, com link para download e agenda de webinars de capacitação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://fnp.org.br/resultado-da-busca?q=reforma+tributaria" rel="noopener noreferrer"
+            target="_blank">
+            <i class="fa-solid fa-search"></i>
+            <span>FNP: Todos os Conteúdos sobre Reforma Tributária</span>
+            <!-- Síntese: Página de resultados de busca consolidando todas as notícias, publicações, webinars e documentos produzidos pela FNP sobre a reforma tributária, organizados por data e relevância -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cnm.org.br/storage/biblioteca/2024/Livros/202412_LIV_FIN_Municipios_brasileiros_reforma_tributaria_consumo_impactos.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book-atlas"></i>
+            <span>Livro CNM: Municípios Brasileiros e a Reforma Tributária</span>
+            <!-- Síntese: Publicação acadêmica de 2024 com estudo completo sobre impactos financeiros, administrativos e jurídicos da reforma nos municípios brasileiros, incluindo projeções de receita e análise de cenários -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cnm.org.br/biblioteca/download/15644" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Estudo CNM: Distribuição do IBS e Coeficiente de Participação</span>
+            <!-- Síntese: Estudo técnico detalhando metodologia de cálculo dos coeficientes de participação dos municípios na distribuição da arrecadação do IBS, com tabelas e exemplos práticos -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cnm.org.br/comunicacao/noticias/cnm-lanca-cartilha-sobre-reforma-tributaria"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Cartilha CNM sobre Reforma Tributária (Dez/2024)</span>
+            <!-- Síntese: Cartilha municipalista com linguagem acessível explicando em termos simples os conceitos básicos da reforma, impactos nas finanças locais e passos necessários para adequação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://cnm.org.br/comunicacao/noticias/confira-orientacao-para-ajustes-das-notas-fiscais-do-ibs-e-cbs-pois-impactarao-na-tributacao-municipal"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>Orientação CNM: Ajustes das Notas Fiscais do IBS e CBS</span>
+            <!-- Síntese: Notícia com orientações práticas sobre como municípios devem ajustar seus sistemas de notas fiscais para compatibilidade com IBS/CBS, incluindo prazos e procedimentos técnicos -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://abrasf.org.br/images/2025/Arquivos/Modelo_COSISP.pdf" rel="noopener noreferrer"
+            target="_blank">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Modelo de Legislação COSISP (ABRASF)</span>
+            <!-- Síntese: Modelo de lei municipal completo para instituição da Contribuição para Custeio de Iluminação e Segurança Pública, com todos os artigos, anexos e justificativa técnica-jurídica -->
           </a>
         </li>
 
@@ -387,50 +630,211 @@
           <a href="https://abrasf.org.br/images/2025/Arquivos/Modelo_IPTU.pdf" rel="noopener noreferrer"
             target="_blank">
             <i class="fa-solid fa-building"></i>
-            <span>Tributação Imobiliária – Atualização da Base de Cálculo do
-              IPTU por ato do Poder Executivo (ABRASF)</span>
+            <span>Tributação Imobiliária – Atualização Base de Cálculo IPTU (ABRASF)</span>
+            <!-- Síntese: Modelo de legislação para atualização da base de cálculo do IPTU considerando a nova realidade da reforma tributária, com metodologia de reavaliação de imóveis e critérios de progressividade -->
           </a>
         </li>
 
         <li>
-          <a href="https://www.enat.receita.economia.gov.br/pt-br/area_nacional/areas_interesse/sinter/celebracao-de-convenios-orientacoes-gerais"
+          <a href="https://abm.org.br/abm-defende-manutencao-da-tributacao-atual-para-servicos-de-saneamento/"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-map-location-dot"></i>
-            <span>Orientações Gerais – Portal SINTER: Integração de dados
-              cadastrais, geoespaciais, fiscais e jurídicos (imóveis urbanos e
-              rurais)</span>
+            <i class="fa-solid fa-faucet"></i>
+            <span>ABM defende tributação de saneamento</span>
+            <!-- Síntese: Posicionamento oficial da ABM defendendo manutenção de tratamento tributário diferenciado para serviços de saneamento, com argumentos jurídicos e impactos econômicos da mudança -->
           </a>
         </li>
 
         <li>
-          <a href="https://www.planalto.gov.br/CCIVIL_03/Projetos/Ato_2023_2026/2024/PLP/plp-108.htm"
+          <a href="https://famurs.com.br/uploads/noticia/46012/REFORMA_TRIBUTRIA_ALEX_C_CNM.pdf"
             rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Projeto de Lei Complementar nº 108/2024 (PLP 108/2024) – Institui
-              o Comitê Gestor do IBS (CGIBS)</span>
+            <i class="fa-solid fa-file-powerpoint"></i>
+            <span>Apresentação: O que os Municípios Precisam Saber (FAMURS/CNM)</span>
+            <!-- Síntese: Slides de apresentação para gestores municipais com checklist de adequação, cronograma visual, impactos financeiros projetados e casos de sucesso de municípios pioneiros -->
           </a>
         </li>
+
+        <li>
+          <a href="https://comsefaz.org.br/novo/wp-content/uploads/2024/11/DOC-20241106-WA0022_241106_1255381.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-handshake"></i>
+            <span>Acordo de Cooperação Técnica 001/2024 – COMSEFAZ e FNP</span>
+            <!-- Síntese: Documento formal do acordo de cooperação técnica estabelecendo responsabilidades, objetivos, metas e recursos para capacitação técnica de municípios na reforma tributária -->
+          </a>
+        </li>
+
+        <li>
+          <a href="http://sped.rfb.gov.br/arquivo/show/7885" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-database"></i>
+            <span>Perguntas Frequentes EFD ICMS/IPI v7.7 (Item 19.1 – CBS/IBS)</span>
+            <!-- Síntese: FAQ oficial do SPED detalhando como reportar IBS/CBS no EFD ICMS/IPI, com exemplos de escrituração, códigos de ajustes e tratamento de créditos acumulados -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.nfe.fazenda.gov.br/portal/principal.aspx" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Nota Técnica 2025.002 – Adequações NF-e/NFC-e para IBS/CBS</span>
+            <!-- Síntese: Nota técnica do ENCAT detalhando inclusão de campos de IBS/CBS no leiaute da NF-e e NFC-e, com regras de preenchimento, validações e cronograma de obrigatoriedade -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=6vT0rTNhFLY%3D"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Projeto Reforma Tributária do Consumo – Adequações NF-e</span>
+            <!-- Síntese: Documento projeto descrevendo todas as modificações necessárias no sistema NF-e para compatibilização com a reforma tributária, incluindo novos grupos, campos e regras de validação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=hDHoBqhO7H8="
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Nota Técnica 2025.001 (BP-e) – Adequação dos leiautes à RTC</span>
+            <!-- Síntese: Nota técnica específica para adequação do BP-e (BARCODE de produtos) ao novo layout da reforma tributária, com alterações na estrutura de dados e regras de vinculação -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=fR216JGyZYw="
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Nota Técnica 2025.001 (CT-e) – Adequação dos leiautes à RTC</span>
+            <!-- Síntese: Nota técnica sobre mudanças no CT-e para inclusão de informações de IBS/CBS em operações de transporte, com novos campos e regras de crédito para transportadoras -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://dfe-portal.svrs.rs.gov.br/Nf3e/Documentos#:~:text=Nota%20T%C3%A9cnica%202025.001%20%2D%20RTC%20v1.10"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Nota Técnica 2025.001 (NF3e) – Adequações para a RTC</span>
+            <!-- Síntese: Documento técnico do NF3e (Nota Fiscal Eletrônica de 3° setor) com adaptações para campos de IBS/CBS, mantendo especificidades do setor de educação, saúde e assistência social -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://dfe-portal.svrs.rs.gov.br/Nfcom/Documentos#:~:text=Nota%20T%C3%A9cnica%202025.001%20%2D%20RTC%20v1.10"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Nota Técnica 2025.001 (NFCom) – Adequações para a RTC</span>
+            <!-- Síntese: Nota técnica específica para o modelo NFCom (nota fiscal de comunicação) adaptando seu leiaute para inclusão de informações de IBS/CBS em operações de telecomunicações -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://dfe-portal.svrs.rs.gov.br/Mdfe/Documentos#" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Nota Técnica Conjunta 2025.001 – CNPJ Alfanumérico</span>
+            <!-- Síntese: Nota técnica conjunta dos estados do RS e SC sobre implementação do CNPJ alfanumérico em todos os documentos fiscais eletrônicos, com regras de validação e compatibilidade retroativa -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.youtube.com/watch?v=8NMTTkpOHK8" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-video"></i>
+            <span>Apuração Assistida da CBS e do IBS (Webinar WK)</span>
+            <!-- Síntese: Gravação de webinar de 1h40 minutos com auditor da Receita Federal demonstrando em tela como funciona o módulo de apuração assistida, com casos práticos e respostas a perguntas dos participantes -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.youtube.com/watch?v=hS-Qh8Dn5vM" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-video"></i>
+            <span>IBS e CBS: Preenchimento Obrigatório (Webinar ROIT)</span>
+            <!-- Síntese: Webinar da ROIT Consultores explicando quando e como o preenchimento dos campos de IBS/CBS se torna obrigatório nas notas fiscais, com exemplos de multas por erro de preenchimento e casos de isenção -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.youtube.com/watch?v=pdQeT-H1NMs" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Como fazer Classificação Tributária CST/NCM (Tutorial)</span>
+            <!-- Síntese: Tutorial prático em vídeo ensinando como classificar produtos e serviços para fins de IBS/CBS usando CST, NCM e NBS, com exemplos reais e tabela de correspondências -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.acipcdl.com.br/wp-content/uploads/2025/01/Cartilha-Reforma-Tributaria-2025.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-shop"></i>
+            <span>Cartilha Reforma Tributária 2025 (ACIP/CDL)</span>
+            <!-- Síntese: Cartilha empresarial voltada para comerciantes e industriais, com linguagem simplificada explicando impactos da reforma no dia a dia, obrigações novas e benefícios potenciais -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.reformatributaria.com/ebooks-e-estudos/" rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>E-books e Estudos – Portal ReformaTributaria.com</span>
+            <!-- Síntese: Portal que reúne publicações acadêmicas, estudos de impacto, análises setoriais e e-books sobre a reforma tributária, mantido por institutos de pesquisa e consultorias especializadas -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://joseadriano.com.br/wp-content/uploads/2025/11/MitySafe_ReformaTributa%CC%81ria_JoseAdriano_NFS-e.pdf"
+            rel="noopener noreferrer" target="_blank">
+            <i class="fa-solid fa-file-powerpoint"></i>
+            <span>Apresentação: NFS-e Nacional e Adesão (José Adriano/MitySafe)</span>
+            <!-- Síntese: Slides de apresentação técnica para contadores e gestores sobre obrigatoriedade da NFS-e nacional, casos de municípios que já aderiram e procedimentos para migração -->
+          </a>
+        </li>
+
+        <li>
+          <a href="https://drive.google.com/file/d/1QOwx5mn2WrxkjLtgVCBCth45SSf_96Ir/view" rel="noopener noreferrer"
+            target="_blank">
+            <i class="fa-solid fa-city"></i>
+            <span>Relatório Técnico nº 07/2025 – Case Município de Ilhéus (BA)</span>
+            <!-- Síntese: Relatório detalhado da experiência piloto de implementação da reforma tributária em Ilhéus-BA, com lições aprendidas, desafios enfrentados e recomendações para outros municípios -->
+          </a>
+        </li>
+
       </ul>
     </div>
+  </main>
 
-    <!-- FIM DO CONTEÚDO PRINCIPAL -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>
+        <strong>Endereço:</strong> Praça Barão do Rio Branco, 16 — Centro,
+        Sete Lagoas/MG • CEP 35700-029 •
+        <strong>Telefone:</strong> (31) 93301-0753 •
+        <strong>Órgão:</strong> Secretaria Municipal da Fazenda
+      </p>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Prefeitura de Sete Lagoas — Todos os direitos reservados.
+    </div>
+  </footer>
 
-    <!-- RODAPÉ PADRÃO -->
-    <footer class="footer">
-      <div class="footer-container">
-        <p>
-          <strong>Endereço:</strong> Praça Barão do Rio Branco, 16 — Centro,
-          Sete Lagoas/MG • CEP 35700-029 •
-          <strong>Telefone:</strong> (31) 93301-0753 •
-          <strong>Órgão:</strong> Secretaria Municipal da Fazenda
-        </p>
-      </div>
-      <div class="footer-bottom">
-        © 2025 Prefeitura de Sete Lagoas — Todos os direitos reservados.
-      </div>
-    </footer>
+  <script src="assets/js/script.js"></script>
 
-    <script src="assets/js/script.js"></script>
+  <script>
+    function filterLibrary() {
+      var input = document.getElementById('librarySearch');
+      var filter = input.value.toUpperCase();
+      var ul = document.getElementById("libraryList");
+      var li = ul.getElementsByTagName('li');
+
+      for (var i = 0; i < li.length; i++) {
+
+        if (li[i].classList.contains('categoria-header')) continue;
+
+        var a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
+
+        var cleanText = txtValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+        var cleanFilter = filter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+
+        if (cleanText.indexOf(cleanFilter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>

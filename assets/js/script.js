@@ -626,3 +626,177 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+/**
+ * Advanced Client-Side Search Engine
+ * @version 2.0.0
+ * @description Indexa conteúdo visível e comentários ocultos para busca ponderada.
+ */
+class SearchEngine {
+  constructor(listId, searchInputId) {
+    this.listElement = document.getElementById(listId);
+    this.inputElement = document.getElementById(searchInputId);
+    this.itemsIndex = [];
+    this.isInitialized = false;
+
+    if (this.listElement && this.inputElement) {
+      this.init();
+    } else {
+      console.error("Elementos da busca não encontrados.");
+    }
+  }
+
+  init() {
+    this.buildIndex();
+    this.bindEvents();
+    this.isInitialized = true;
+  }
+
+  /**
+   * Extrai apenas o texto dos comentários HTML dentro de um elemento.
+   * Utiliza TreeWalker/NodeIterator para performance.
+   */
+  extractComments(element) {
+    let comments = "";
+    // O filtro 128 é NodeFilter.SHOW_COMMENT
+    const iterator = document.createNodeIterator(
+      element,
+      128,
+      null,
+      false
+    );
+
+    let node;
+    while ((node = iterator.nextNode())) {
+      // Limpa prefixos comuns como "Síntese:" se existirem
+      const cleanComment = node.nodeValue.replace(/Síntese:/yi, "").trim();
+      comments += " " + cleanComment;
+    }
+    return comments;
+  }
+
+  /**
+   * Normaliza strings para comparação (remove acentos, lowerCase).
+   */
+  normalize(str) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  /**
+   * Constroi o índice em memória uma única vez.
+   */
+  buildIndex() {
+    const listItems = this.listElement.querySelectorAll("li");
+
+    listItems.forEach((li) => {
+      // Ignora headers de categoria se não tiverem links
+      if (li.classList.contains("categoria-header")) return;
+
+      const anchor = li.querySelector("a");
+      if (!anchor) return;
+
+      const titleText = anchor.textContent || anchor.innerText;
+
+      // A mágica: Lê o comentário oculto no HTML
+      const hiddenSynthesis = this.extractComments(li);
+
+      this.itemsIndex.push({
+        element: li,
+        originalDisplay: li.style.display || "", // Salva display original
+        titleNorm: this.normalize(titleText),
+        synthesisNorm: this.normalize(hiddenSynthesis),
+        score: 0
+      });
+    });
+  }
+
+  bindEvents() {
+    // Debounce para não travar a UI em digitação rápida
+    let timeout = null;
+    this.inputElement.addEventListener("keyup", (e) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        this.performSearch(e.target.value);
+      }, 150);
+    });
+  }
+
+  performSearch(query) {
+    const term = this.normalize(query).trim();
+
+    // Se a busca estiver vazia, reseta a lista
+    if (!term) {
+      this.resetView();
+      return;
+    }
+
+    const searchTerms = term.split(/\s+/); // Tokeniza a busca (ex: "Nota IBS" -> ["nota", "ibs"])
+    let hasResults = false;
+
+    // 1. Fase de Pontuação (Scoring)
+    this.itemsIndex.forEach((item) => {
+      let score = 0;
+
+      searchTerms.forEach((word) => {
+        if (!word) return;
+
+        // Peso 10: Palavra encontrada no Título
+        if (item.titleNorm.includes(word)) score += 10;
+
+        // Peso 5: Palavra encontrada na Síntese (Comentário)
+        if (item.synthesisNorm.includes(word)) score += 5;
+      });
+
+      item.score = score;
+      if (score > 0) hasResults = true;
+    });
+
+    // 2. Fase de Renderização e Reordenação
+    if (!hasResults) {
+      // Opcional: Mostrar mensagem de "Nenhum resultado"
+      this.itemsIndex.forEach(item => item.element.style.display = "none");
+    } else {
+      // Ordena o array de índice pelo score (do maior para o menor)
+      const sortedItems = [...this.itemsIndex].sort((a, b) => b.score - a.score);
+
+      // Re-anexa os elementos no DOM na nova ordem
+      sortedItems.forEach((item) => {
+        if (item.score > 0) {
+          item.element.style.display = item.originalDisplay; // Mostra
+          // Mover para o final da lista cria a ordenação visual correta
+          // pois estamos iterando do maior score para o menor
+          this.listElement.appendChild(item.element);
+        } else {
+          item.element.style.display = "none"; // Esconde irrelevantes
+        }
+      });
+    }
+
+    // Reinsere os headers de categoria se necessário, ou esconde-os durante a busca
+    // Nesta implementação avançada, focamos nos resultados.
+    this.toggleHeaders(false);
+  }
+
+  resetView() {
+    // Restaura a ordem original? 
+    // Em HTML estático, recarregar a página é o reset mais simples, 
+    // mas podemos apenas mostrar tudo novamente.
+    this.itemsIndex.forEach((item) => {
+      item.element.style.display = item.originalDisplay;
+      item.score = 0;
+    });
+    this.toggleHeaders(true);
+  }
+
+  toggleHeaders(show) {
+    const headers = this.listElement.querySelectorAll(".categoria-header");
+    headers.forEach(h => h.style.display = show ? "" : "none");
+  }
+}
+
+// Inicialização segura quando o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", () => {
+  new SearchEngine("libraryList", "librarySearch");
+});
